@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import './Grid.css';
-import Data from './data.js';
+import Data from './data';
 import Logo from './Logo';
 import Language from './Language';
 import Tool from './Tool';
