@@ -1,14 +1,23 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 function Language (props) {
-  return props.langu.map ((len, index) => {
-    return (
-      <li key={index}>
-        {len}
 
-      </li>
-    );
-  });
+  
+  
+  
+  const click = () => {
+    props.setLanguageState(props.language)
+
+  }
+  
+    return (
+      <li onClick={click} >
+        {props.language} 
+        </li>
+        
+  
+    )
+  
 }
 
 export default Language;

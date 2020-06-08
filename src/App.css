@@ -28,7 +28,20 @@
   border-radius: 5px;
 }
 .column-main {
-  margin-bottom: 30px;
+  margin-top: 30px;
+}
+.column-head {
+  height: 100px;
+  margin-bottom: 10px;
 }
 
+.show {
+  display: block;
+  background-color: brown;
+  height: 100px;
+  margin-bottom: 10px;
+}
+.hide {
+  display: none;
+}
 
