@@ -4,73 +4,101 @@ import './Grid.css';
 import Data from './data';
 import Logo from './Logo';
 import Language from './Language';
-import Tool from './Tool';
-import LanguSelect from './LanguSelect';
+
 
 function App () {
-  const[languageState, setLanguageState] = useState("");
+  const[languageState, setLanguageState] = useState([]);
+  //const[allData, setAllData] = useState(Data);
 
+  // const allDataRender = () => {
+  //   if(){
+  //     setAllData()
+  //   }
+    
+  // }
+
+
+  
+  const addlanguage = (myArr) => {
+    console.log(myArr)
+    if(!languageState.includes(myArr)) {
+      setLanguageState((languageState) => 
+          [...languageState, myArr]
+      )
+    }
+  } 
 
   return (
     <div className="App">
       <div className="main container">
-  <div className={languageState ? "show" : "hide"}>
-    <span>{languageState}</span>
-  </div>
-        {Data.map (job => {
-          return (
-            
-            <div key={job.id} className="column-main row">
+        <header className="header"></header>
+          <div className={languageState ? "show" : "hide"}>
+            {languageState.map(languageSelected => {
+              return(
+                <button value={languageSelected}>{languageSelected}</button>
+              )
+              })
+            }
+            </div>
 
-              <div className="card-logo sm-col-12 lg-col-1">
-                <Logo imgLogo={job.logo} className="loggo lg-col-1" />
-              </div>
-              
+            {Data.map(job => {
+              const myArr = [job.role,job.level]
+              job.languages.map(language => 
+              myArr.push(language)
+              )
+              return (
 
-              <div className="card-main1 sm-col-12 lg-col-4">
-                <div className="company">
-                  <ul>
-                    <li className="">{job.company}</li>
-                    {job.new ? <li className="new">NEW!</li> : <li />}
-                    {job.featured
-                      ? <li className="featured">FEATURED</li>
-                      : <li />}
-                  </ul>
+                
+                <div key={job.id} className="column-main row">
+
+                  <div className="card-logo sm-col-12 lg-col-1">
+                    <Logo imgLogo={job.logo} className="loggo lg-col-1" />
+                  </div>
+                  <div className="card-main1 sm-col-12 lg-col-4">
+                    <div className="company">
+                      <ul>
+                        <li className="">{job.company}</li>
+                        {job.new ? <li className="new">NEW!</li> : <li />}
+                        {job.featured
+                          ? <li className="featured">FEATURED</li>
+                          : <li />}
+                      </ul>
+
+                  </div>
+                    <h3 className="position">
+                      {job.position}
+                    </h3>
+                    <ul className="metadata">
+                      <li>{job.postedAt}</li>
+                      <li>{job.contract}</li>
+                      <li>{job.location}</li>
+                    </ul>
+                  </div>
+
+                  <div className="card-main2 sm-col-12 lg-col-4">
+                    <ul>
+                      {myArr.map ((language, index) => {
+                        
+                          return(
+                            <Language key={index} language={language} setLanguageState={addlanguage}
+                          />
+                          )
+                        })
+                      }
+                      
+                          
+                    </ul>
+
+                  </div>
 
                 </div>
-                <h3 className="position">
-                  {job.position}
-                </h3>
-                <ul className="metadata">
-                  <li>{job.postedAt}</li>
-                  <li>{job.contract}</li>
-                  <li>{job.location}</li>
-                </ul>
-              </div>
+              );
+            })
+          }
+          
+        </div>
+        </div>
+      );
 
-              <div className="card-main2 sm-col-12 lg-col-4">
-                <ul>
-                  <li>{job.role}</li>
-                  <li>{job.level}</li>
-                  {job.languages.map ((language, index) => {
-                    
-                    return(
-                      <Language key={index} language={language} setLanguageState={setLanguageState}
-                    />
-                    )
-                  })}
-                  
-                  <Tool tooll={job.tools} />
-                </ul>
-
-              </div>
-
-            </div>
-          );
-        })}
-      
-    </div>
-    </div>
-  );
 }
 export default App;
