@@ -8,19 +8,26 @@ import Language from './Language';
 
 function App () {
   const[languageState, setLanguageState] = useState([]);
-  //const[allData, setAllData] = useState(Data);
+  const[allData, setAllData] = useState(Data);
 
-  // const allDataRender = () => {
-  //   if(){
-  //     setAllData()
-  //   }
+  const allDataRender = () => {
+    const filtered = allData.filter((el) => {
+      
+      return languageState.indexOf(el.languages) > 0;
+    } 
+  
+    )
+    console.log(filtered);
     
-  // }
+    setAllData(filtered)
+
+    
+    
+  }
 
 
   
   const addlanguage = (myArr) => {
-    console.log(myArr)
     if(!languageState.includes(myArr)) {
       setLanguageState((languageState) => 
           [...languageState, myArr]
@@ -33,9 +40,9 @@ function App () {
       <div className="main container">
         <header className="header"></header>
           <div className={languageState ? "show" : "hide"}>
-            {languageState.map(languageSelected => {
+            {languageState.map((languageSelected, index) => {
               return(
-                <button value={languageSelected}>{languageSelected}</button>
+                <button key={index} onClick={allDataRender}>{languageSelected}</button>
               )
               })
             }
